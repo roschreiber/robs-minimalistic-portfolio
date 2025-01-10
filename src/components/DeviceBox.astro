@@ -11,7 +11,7 @@ let devices: Device[] = [];
 
 try {
   console.log('Fetching devices...');
-  const response = await fetch('http://localhost:4321/api/battery?password=your_password_here');
+  const response = await fetch(`http://localhost:4321/api/battery?password=${import.meta.env.APPLE_PW}`);
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }

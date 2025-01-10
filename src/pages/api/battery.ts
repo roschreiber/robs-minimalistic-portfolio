@@ -13,7 +13,7 @@ interface LastMessage {
 }
 
 const config = {
-  api_pw: 'Flint1UndauntedElevate'
+  api_pw: import.meta.env.APPLE_PW
 };
 
 let lastmessage: LastMessage = {

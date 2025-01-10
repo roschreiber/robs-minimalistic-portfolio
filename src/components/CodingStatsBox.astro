@@ -19,7 +19,7 @@ try {
   const languageColors = await colorResponse.json();
 
   console.log('Fetching coding stats...');
-  const apiKey = 'b03b89e4-eaea-4774-af4f-9d3e25e6d362';
+  const apiKey = import.meta.env.WAKATIME_KEY;
   const response = await fetch(`https://waka.hackclub.com/api/v1/users/current/stats/last_7_days?api_key=${apiKey}`);
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
