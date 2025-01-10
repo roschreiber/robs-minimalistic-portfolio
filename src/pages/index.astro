@@ -1,16 +1,29 @@
 ---
-
+import Header from '../components/Header.astro';
+import Layout from '../layouts/Layout.astro';
+import CurrentTime from '../components/CurrentTime.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import SpotifyStatus from '../components/SpotifyStatus.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+	<main class="container mx-auto px-4 py-8 ">
+		<Header />
+		<div class="text-xl">
+			<p class="font-semibold tracking-wide text-white text-opacity-75">Welcome to my personal website. 
+				<div class="font-semibold tracking-wide leading-5 text-white text-opacity-75">
+					You can find my projects, music, social media, and some info about me here.
+			</div>
+			</p>
+		</div>
+		<div class="font-semibold tracking-wide text-lg leading-8 mt-1">
+			<CurrentTime />
+		</div>
+		<div class="mt-4">
+			<SocialLinks />
+		</div>
+		<div class="mt-4">
+			<SpotifyStatus />
+		</div>
+	</main>
+</Layout>

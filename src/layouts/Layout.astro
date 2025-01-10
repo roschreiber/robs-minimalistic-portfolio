@@ -1,0 +1,23 @@
+---
+import Header from "../components/Header.astro";
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>rob</title>
+        <style>
+            @font-face {
+                font-family: 'Flix';
+                src: url('/fonts/flix.woff2') format('woff2');
+                font-weight: normal;
+                font-style: normal;
+            }
+        </style>
+    </head>
+    <body class="bg-black text-white">
+        <div class="font-['Flix']">
+            <slot />
+        </div>
+    </body>
+</html>

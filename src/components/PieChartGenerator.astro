@@ -1,0 +1,62 @@
+---
+interface Props {
+  languageUsage: {
+    language: string;
+    time: string;
+    color: string;
+  }[];
+}
+
+const { languageUsage } = Astro.props;
+
+// Convert time strings to numbers (assuming format like "1 hr 30 mins")
+const timeToMinutes = (timeStr: string) => {
+  const hours = timeStr.match(/(\d+)\s*hr/);
+  const mins = timeStr.match(/(\d+)\s*min/);
+  return (hours ? parseInt(hours[1]) * 60 : 0) + (mins ? parseInt(mins[1]) : 0);
+};
+
+// Calculate total time and percentages
+const total = languageUsage.reduce((sum, lang) => sum + timeToMinutes(lang.time), 0);
+let currentAngle = 0;
+const segments = languageUsage.map(lang => {
+  const minutes = timeToMinutes(lang.time);
+  const percentage = (minutes / total) * 100;
+  const startAngle = currentAngle;
+  currentAngle += (percentage / 100) * 360;
+  return {
+    ...lang,
+    startAngle,
+    endAngle: currentAngle
+  };
+});
+
+// Helper function to convert angle to SVG coordinates
+const polarToCartesian = (angle: number) => {
+  const radius = 80;
+  const angleInRadians = (angle - 90) * Math.PI / 180.0;
+  return {
+    x: 100 + (radius * Math.cos(angleInRadians)),
+    y: 100 + (radius * Math.sin(angleInRadians))
+  };
+};
+
+// Generate SVG path for each segment
+const createArc = (startAngle: number, endAngle: number) => {
+  const start = polarToCartesian(startAngle);
+  const end = polarToCartesian(endAngle);
+  const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+  return `M ${start.x} ${start.y} A 80 80 0 ${largeArcFlag} 1 ${end.x} ${end.y} L 100 100`;
+};
+---
+
+<svg viewBox="0 0 200 200" class="w-full h-full">
+  {segments.map(segment => (
+    <path
+      d={createArc(segment.startAngle, segment.endAngle)}
+      fill={segment.color}
+      stroke="#fff"
+      stroke-width="1"
+    />
+  ))}
+</svg>

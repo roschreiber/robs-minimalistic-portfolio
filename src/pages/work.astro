@@ -1,0 +1,91 @@
+---
+import Header from '../components/Header.astro';
+import Layout from '../layouts/Layout.astro';
+import Box from '../components/Box.astro';
+import GithubBox from '../components/GithubBox.astro';
+---
+
+<Layout>
+  <main class="container mx-auto px-4 py-8">
+    <Header />
+    <div class="flex flex-col items-start gap-4">
+      <div class="flex items-center rounded-full border-2 border-white border-opacity-20 relative">
+        <button id="projects-tab" class="relative cursor-pointer px-2 py-1 md:px-3 xl:px-6">
+          <p class="text-sm capitalize text-white md:text-base xl:text-lg">projects</p>
+        </button>
+        <button id="oss-tab" class="relative cursor-pointer px-2 py-1 md:px-3 xl:px-6">
+          <p class="text-sm capitalize text-white md:text-base xl:text-lg">OSS</p>
+        </button>
+        <div id="tab-underline" class="absolute bottom-0 h-full rounded-full bg-white bg-opacity-10 transition-all duration-150"></div>
+      </div>
+      <div id="content" class="grid w-full max-w-2xl grid-cols-1 gap-4">
+        <div id="projects-content">
+          <Box 
+            image="/imgs/projects/codedex-bot-logo-compressed.gif" 
+            title="Codedex-90s" 
+            description="My recreation of the Codédex Website in a 90s aesthetic. Heavily inspired by geocities." 
+            status="online" 
+            users="800+" 
+            languages={[
+              { name: 'Astro', color: 'yellow' },
+              { name: 'TypeScript', color: 'blue' }
+            ]} 
+          />
+          <Box 
+            image="/imgs/projects/raccBot.png" 
+            title="radio.world" 
+            description="A invite only clone of radio.garden with snappier UI and more features." 
+            status="maintenance" 
+            users="250+" 
+            languages={[
+              { name: 'Astro', color: 'yellow' },
+              { name: 'TypeScript', color: 'blue' },
+              { name: 'MongoDB', color: 'green' }
+            ]} 
+          />
+        </div>
+        <div id="oss-content" class="hidden">
+          <GithubBox />
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const projectsTab = document.getElementById('projects-tab');
+    const ossTab = document.getElementById('oss-tab');
+    const tabUnderline = document.getElementById('tab-underline');
+    const projectsContent = document.getElementById('projects-content');
+    const ossContent = document.getElementById('oss-content');
+
+    const updateTabUnderline = (element: HTMLElement) => {
+      if (!tabUnderline) return;
+      const rect = element.getBoundingClientRect();
+      const parentRect = element.parentElement?.getBoundingClientRect();
+      if (!parentRect) return;
+
+      const relativeLeft = rect.left - parentRect.left;
+      tabUnderline.style.width = `${rect.width}px`;
+      tabUnderline.style.transform = `translateX(${relativeLeft}px)`;
+    };
+
+    projectsTab?.addEventListener('click', () => {
+      projectsContent?.classList.remove('hidden');
+      ossContent?.classList.add('hidden');
+      updateTabUnderline(projectsTab);
+    });
+
+    ossTab?.addEventListener('click', () => {
+      projectsContent?.classList.add('hidden');
+      ossContent?.classList.remove('hidden');
+      updateTabUnderline(ossTab);
+    });
+
+    // Initialize underline position
+    if (projectsTab) {
+      updateTabUnderline(projectsTab);
+    }
+  });
+</script>

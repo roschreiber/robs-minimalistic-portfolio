@@ -1,0 +1,91 @@
+---
+import PieChartGenerator from './PieChartGenerator.astro';
+
+interface CodingStats {
+  totalCodingTime: string;
+  mostUsedLanguage: string;
+  languageUsage: { language: string; time: string; color: string }[];
+}
+
+let codingStats: CodingStats = {
+  totalCodingTime: "Loading...",
+  mostUsedLanguage: "Loading...",
+  languageUsage: [],
+};
+
+try {
+  // Fetch language colors first
+  const colorResponse = await fetch('https://raw.githubusercontent.com/ozh/github-colors/master/colors.json');
+  const languageColors = await colorResponse.json();
+
+  console.log('Fetching coding stats...');
+  const apiKey = 'b03b89e4-eaea-4774-af4f-9d3e25e6d362';
+  const response = await fetch(`https://waka.hackclub.com/api/v1/users/current/stats/last_7_days?api_key=${apiKey}`);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const result = await response.json();
+  const data = result.data; // Access the nested data object
+  //console.log('Coding stats fetched successfully:', data);
+  codingStats = {
+    totalCodingTime: data.human_readable_total,
+    mostUsedLanguage: data.languages[0].name,
+    languageUsage: data.languages.map((lang: any) => ({
+      language: lang.name,
+      time: lang.text,
+      color: languageColors[lang.name]?.color || '#858585' // Use gray as fallback color
+    }))
+  };
+} catch (error) {
+  console.error('Error fetching coding stats:', error);
+  codingStats = {
+    totalCodingTime: "Error loading data",
+    mostUsedLanguage: "Error loading data",
+    languageUsage: [],
+  };
+}
+---
+
+<div class="flex text-white flex-wrap gap-2">
+  <div class="flex flex-row w-full gap-2">
+    <div class="rounded-lg border bg-card text-card-foreground shadow-sm" style="width:324px;height:122px">
+      <div class="p-6 flex flex-row items-center space-y-0 pb-2">
+        <h1 class="tracking-tight text-sm font-medium">Coding hours</h1>
+      </div>
+      <div class="p-6 pt-0">
+        <div class="text-lg font-bold">{codingStats.totalCodingTime}</div>
+        <p class="text-xs text-muted-foreground">in the last 7 days</p>
+      </div>
+    </div>
+    <div class="rounded-lg border bg-card text-card-foreground shadow-sm" style="width:324px;height:122px">
+      <div class="p-6 flex flex-row items-center space-y-0 pb-2">
+        <h1 class="tracking-tight text-sm font-medium">Most used language</h1>
+      </div>
+      <div class="p-6 pt-0">
+        <div class="text-lg font-bold">{codingStats.mostUsedLanguage}</div>
+        <p class="text-xs text-muted-foreground">{codingStats.languageUsage[0]?.time || "No data"}</p>
+      </div>
+    </div>
+  </div>
+  <div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full" style="width:656px;height:414px">
+    <div class="flex flex-col space-y-1.5 p-6">
+      <h1 class="font-semibold tracking-tight text-lg">Top Languages</h1>
+      <p class="text-xs text-muted-foreground">of the last 7 days</p>
+    </div>
+    <div class="p-6 pt-0 grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-0">
+      <div class="relative h-[250px]">
+        <PieChartGenerator languageUsage={codingStats.languageUsage} />
+      </div>
+      <div class="flex items-center justify-center">
+        <div class="p-4">
+          {codingStats.languageUsage.map((lang) => (
+            <div class="mb-2 flex items-center text-sm">
+              <span class="mr-2 inline-block h-4 w-4" style={`background-color:${lang.color}`}></span>
+              {lang.language} - {lang.time}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

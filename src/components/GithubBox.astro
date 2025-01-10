@@ -1,0 +1,79 @@
+---
+interface Repository {
+  name: string;
+  description: string | null;
+  html_url: string;
+  language: string;
+  stargazers_count: number;
+  forks_count: number;
+}
+
+interface LanguageColor {
+  color: string;
+}
+---
+
+<div class="flex w-full flex-col items-start gap-4">
+  <div class="grid w-full auto-rows-fr grid-cols-2 gap-4 no-scrollbar" id="github-repos">
+  </div>
+</div>
+
+<script>
+  async function fetchLanguageColors() {
+    try {
+      const response = await fetch('https://raw.githubusercontent.com/ozh/github-colors/master/colors.json');
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching language colors:', error);
+      return {};
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const languageColors = await fetchLanguageColors();
+    const response = await fetch('https://api.github.com/users/roschreiber/repos');
+    const repositories = await response.json();
+
+    const reposContainer = document.getElementById('github-repos');
+    if (reposContainer) {
+      repositories.forEach((repo) => {
+        const repoElement = document.createElement('a');
+        repoElement.href = repo.html_url;
+        repoElement.target = '_blank';
+        repoElement.className = 'overflow-hidden flex flex-col justify-between gap-2 rounded-lg border border-white border-opacity-20 p-4 transition duration-300 hover:bg-white hover:bg-opacity-5 xl:gap-4';
+        
+        const languageColor = repo.language ? (languageColors[repo.language]?.color || '#ffffff') : '#ffffff';
+
+        repoElement.innerHTML = `
+          <div class="flex flex-col">
+            <h3 class="font-medium text-white xl:text-lg">${repo.name}</h3>
+            <p class="text-xs font-light text-white text-opacity-80 xl:text-sm">${repo.description || ''}</p>
+            <div class="no-scrollbar flex w-full items-center gap-2 overflow-hidden text-white">
+              ${repo.language ? `
+                <div class="flex items-center gap-2 whitespace-nowrap rounded bg-white bg-opacity-10 px-3 py-1">
+                    <div class="h-1.5 w-1.5 rounded-full" style="background-color: ${languageColor || '#858585'};"></div>
+                  <p class="text-xs font-light text-white text-opacity-75 xl:text-sm">${repo.language}</p>
+                </div>
+              ` : ''}
+              <div class="flex items-center gap-2 whitespace-nowrap rounded bg-white bg-opacity-10 px-3 py-1">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-white opacity-50">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                <p class="text-xs font-light text-white text-opacity-75 xl:text-sm">${repo.stargazers_count}</p>
+              </div>
+              <div class="flex items-center gap-2 whitespace-nowrap rounded bg-white bg-opacity-10 px-3 py-1">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-white opacity-50">
+                  <path d="M9 17l-5-5 5-5"/>
+                  <path d="M20 18v-2a4 4 0 0 0-4-4H4"/>
+                </svg>
+                <p class="text-xs font-light text-white text-opacity-75 xl:text-sm">${repo.forks_count}</p>
+              </div>
+            </div>
+          </div>
+        `;
+
+        reposContainer.appendChild(repoElement);
+      });
+    }
+  });
+</script>
