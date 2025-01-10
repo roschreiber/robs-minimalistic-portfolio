@@ -74,7 +74,7 @@ const dropdownItems: { [key: string]: { name: string; href: string; }[] } = {
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const pathToId = {
+    const pathToId: { [key: string]: string } = {
       '/': 'home',
       '/whoami': 'whoami',
       '/work': 'mywork',

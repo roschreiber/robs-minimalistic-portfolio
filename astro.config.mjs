@@ -5,21 +5,12 @@ import tailwind from '@astrojs/tailwind';
 
 import icon from 'astro-icon';
 
+import vercel from '@astrojs/vercel';
+
 // https://astro.build/config
 export default defineConfig({
-  output: 'hybrid', // or 'hybrid' if you prefer
   integrations: [tailwind(), icon()],
-  
-  vite: {
-    ssr: {
-        noExternal: ['webcoreui']
-    },
-    css: {
-        preprocessorOptions: {
-            scss: {
-                api: 'modern-compiler'
-            }
-        }
-    }
-}
+
+  output: 'server',
+  adapter: vercel(),
 });
