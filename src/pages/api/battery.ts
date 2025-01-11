@@ -24,6 +24,13 @@ const pushWebsockets = (data: LastMessage) => {
   // Implement your websocket push logic here
 };
 
+const headers = {
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*', // Allow all origins
+  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type'
+};
+
 // Mark this endpoint as server-rendered
 export const prerender = false;
 
@@ -75,23 +82,17 @@ export const GET: APIRoute = async ({ url }) => {
       // Return the current state of devices
       return new Response(JSON.stringify({ apple: lastmessage.apple }), {
         status: 200,
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        headers
       });
     }
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      headers
     });
   }
   return new Response(JSON.stringify({ error: 'Not Found' }), {
     status: 404,
-    headers: {
-      'Content-Type': 'application/json'
-    }
+    headers
   });
 };
 
@@ -129,9 +130,9 @@ export const POST: APIRoute = async ({ request }) => {
       // Log the updated device information to the console
       console.log('Updated device information:', device);
       
-      return new Response("OK", { statusText: "OK", status: 200 });
+      return new Response("OK", { statusText: "OK", status: 200, headers });
     }
-    return new Response("Unauthorized", { statusText: "Unauthorized", status: 401 });
+    return new Response("Unauthorized", { statusText: "Unauthorized", status: 401, headers });
   }
-  return new Response("Not Found", { statusText: "Not Found", status: 404 });
+  return new Response("Not Found", { statusText: "Not Found", status: 404, headers });
 };
