@@ -1,4 +1,6 @@
 ---
+import { Icon } from 'astro-icon/components';
+
 interface Device {
   name: string;
   battery: string;
@@ -36,7 +38,7 @@ function formatLastUpdated(timestamp: number): string {
 }
 ---
 
-<div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full mt-4">
+<div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full mt-2" style="width:656px;height:auto">
   <div class="flex flex-col space-y-1.5 p-6">
     <h1 class="font-semibold tracking-tight text-lg text-white">Connected Devices</h1>
     <p class="text-xs text-muted-foreground text-white text-opacity-75">Battery status and connection info</p>
@@ -61,9 +63,7 @@ function formatLastUpdated(timestamp: number): string {
           <span class="text-sm text-white">{device.battery}%</span>
           <span class="text-xs text-white text-opacity-50">{formatLastUpdated(device.time)}</span>
           {device.charging === 'true' && (
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-green-500">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-            </svg>
+            <Icon name="tabler:bolt-filled" class="w-6 h-6 text-white"/>
           )}
         </div>
       </div>
