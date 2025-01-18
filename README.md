@@ -11,7 +11,7 @@ Most portfolio sites look kinda bland & boring and don't actually tell the visit
 
 It uses ***[Lanyard](https://github.com/Phineas/lanyard)*** to grab your Discord & Spotify Activity on the front page of the website.
 
-
+(You need to join the Lanyard Discord )
 
 ```text
 /

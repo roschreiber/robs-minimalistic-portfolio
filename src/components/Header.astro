@@ -89,6 +89,7 @@ const dropdownItems: { [key: string]: { name: string; href: string; }[] } = {
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    const discordID = import.meta.env.DISCORD_ID;
     const robText = document.getElementById('rob-text');
     const announcerSfx = document.getElementById('announcer-sfx') as HTMLAudioElement;
 
@@ -135,7 +136,7 @@ const dropdownItems: { [key: string]: { name: string; href: string; }[] } = {
 
     const updateStatusDot = async () => {
       try {
-        const response = await fetch('https://api.lanyard.rest/v1/users/316991053242564609');
+        const response = await fetch(`https://api.lanyard.rest/v1/users/${discordID}`);
         const data = await response.json();
         const status = data.data.discord_status;
         const statusDot = document.getElementById('status-dot');
