@@ -1,0 +1,26 @@
+---
+import Header from '../components/Header.astro';
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import WipGif from '../../public/imgs/gifs/Wip.gif';
+---
+
+<Layout>
+  <main class="container mx-auto px-4 py-8">
+    <Header />
+    <div class="flex flex-col items-center gap-4">
+      <div class="text-md font-light text-white/75 text-center">
+        <p class="text-xl font-semibold tracking-wide text-white/75">
+          I am currently working on this section of the website. It won't be done until the next update.
+        </p>
+      </div>
+      <Image 
+        src={WipGif} 
+        alt="Work in Progress" 
+        width={500}
+        height={500}
+        class="max-w-full h-auto"
+      />
+    </div>
+  </main>
+</Layout>

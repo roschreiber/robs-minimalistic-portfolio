@@ -1,0 +1,34 @@
+---
+import Header from '../components/Header.astro';
+import Layout from '../layouts/Layout.astro';
+import TextBox from '../components/TextBox.astro';
+---
+
+<Layout>
+    <main class="container mx-auto px-4 py-8">
+        <Header />
+        <div>
+            <TextBox title="My PC Stats">
+                <ul class="list-disc list-inside space-y-2">
+                    <li><span class="font-semibold">Case:</span> NZXT H5 Flow</li>
+                    <li><span class="font-semibold">Case Fans:</span>5x NF-P12 PWM</li>
+                    <li><span class="font-semibold">Motherboard:</span> ASUS ROG STRIX B650E-F WiFi</li>
+                    <li><span class="font-semibold">CPU:</span> AMD Ryzen 7 5700X</li>
+                    <li><span class="font-semibold">CPU Cooler:</span> Noctua NH-U12S</li>
+                    <li><span class="font-semibold">GPU:</span> AMD Radeon RX 6700 XT</li>
+                    <li><span class="font-semibold">PSU:</span> Thermaltake Toughpower 750W Gold</li>
+                    <li><span class="font-semibold">Memory:</span> Kingston Fury Beast 16GB DDR5</li>
+                    <li><span class="font-semibold">Storage:</span> Samsung 980 1TB M.2 SSD</li>
+                </ul>
+            </TextBox>
+            <TextBox title="My Server Stats" class="mt-4">
+                <ul class="list-disc list-inside space-y-2">
+                    <li><span class="font-semibold">CPU:</span> Intel Xeon X6550</li>
+                    <li><span class="font-semibold">GPU:</span> MSI GeForce GT710</li>
+                    <li><span class="font-semibold">Memory:</span> 64GB DDR3</li>
+                    <li><span class="font-semibold">Storage:</span> Samsung 870 1TB SATA SSD</li>
+                </ul>
+            </TextBox>
+        </div>
+    </main>
+</Layout>

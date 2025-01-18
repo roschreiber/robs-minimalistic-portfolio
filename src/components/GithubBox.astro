@@ -57,7 +57,7 @@ interface LanguageColor {
           <div class="flex flex-col">
             <h3 class="font-medium text-white xl:text-lg">${repo.name}</h3>
             <p class="text-xs font-light text-white text-opacity-80 xl:text-sm">${repo.description || ''}</p>
-            <div class="no-scrollbar flex w-full items-center gap-2 overflow-hidden text-white">
+            <div class="no-scrollbar flex w-full items-center gap-2 overflow-hidden text-white mt-1">
               ${repo.language ? `
                 <div class="flex items-center gap-2 whitespace-nowrap rounded bg-white bg-opacity-10 px-3 py-1">
                     <div class="h-1.5 w-1.5 rounded-full" style="background-color: ${languageColor || '#858585'};"></div>

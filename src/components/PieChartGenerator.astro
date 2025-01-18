@@ -9,14 +9,12 @@ interface Props {
 
 const { languageUsage } = Astro.props;
 
-// Convert time strings to numbers (assuming format like "1 hr 30 mins")
 const timeToMinutes = (timeStr: string) => {
   const hours = timeStr.match(/(\d+)\s*hr/);
   const mins = timeStr.match(/(\d+)\s*min/);
   return (hours ? parseInt(hours[1]) * 60 : 0) + (mins ? parseInt(mins[1]) : 0);
 };
 
-// Calculate total time and percentages
 const total = languageUsage.reduce((sum, lang) => sum + timeToMinutes(lang.time), 0);
 let currentAngle = 0;
 const segments = languageUsage.map(lang => {
@@ -31,7 +29,6 @@ const segments = languageUsage.map(lang => {
   };
 });
 
-// Helper function to convert angle to SVG coordinates
 const polarToCartesian = (angle: number) => {
   const radius = 80;
   const angleInRadians = (angle - 90) * Math.PI / 180.0;
@@ -41,7 +38,6 @@ const polarToCartesian = (angle: number) => {
   };
 };
 
-// Generate SVG path for each segment
 const createArc = (startAngle: number, endAngle: number) => {
   const start = polarToCartesian(startAngle);
   const end = polarToCartesian(endAngle);

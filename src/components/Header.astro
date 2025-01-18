@@ -2,15 +2,17 @@
 const navItems = ['home', 'who am i', 'my work', 'tools', 'my stats'];
 const dropdownItems: { [key: string]: { name: string; href: string; }[] } = {
   'my stats': [
-    {name: 'music', href: '#music'},
-    {name: 'setup', href: '#setup'},
+    //{name: 'music', href: '/music'},
+    {name: 'setup', href: '/setup'},
   ]
 };
 ---
 
 <header class="bg-black text-white py-4">
   <div class="mb-1">
-    <h1 class="text-7xl font-bold" style="font-family: arial;">rob<span id="status-dot" class="text-8xl" style="font-family: Sans;">.</span></h1>
+    <h1 class="text-7xl font-bold" style="font-family: arial;">
+      <span id="rob-text" class="cursor-pointer">rob</span><span id="status-dot" class="text-8xl" style="font-family: Sans;">.</span>
+    </h1>
   </div>
   <nav class="relative">
     <ul class="flex space-x-4">
@@ -28,18 +30,20 @@ const dropdownItems: { [key: string]: { name: string; href: string; }[] } = {
                   onclick="(function(event) {
                     const dropdown = event.currentTarget.nextElementSibling;
                     const caret = event.currentTarget;
-                    if (dropdown.style.display === 'block') {
-                      dropdown.style.display = 'none';
+                    if (dropdown.classList.contains('dropdown-appear')) {
+                      dropdown.classList.remove('dropdown-appear');
                       caret.classList.remove('rotate-180');
                       caret.classList.add('rotate-0');
+                      setTimeout(() => { dropdown.style.display = 'none'; }, 300);
                     } else {
                       dropdown.style.display = 'block';
+                      setTimeout(() => { dropdown.classList.add('dropdown-appear'); }, 10);
                       caret.classList.remove('rotate-0');
                       caret.classList.add('rotate-180');
                     }
                   })(event)"
                 />
-                <div class="absolute right-0 top-6 font-semibold z-50 flex flex-col rounded-md border border-white border-opacity-20 bg-black py-2 md:-left-4 md:right-auto 2xl:top-8" style="opacity: 1; transform: none; display: none;">
+                <div class="absolute right-0 top-6 font-semibold z-50 flex flex-col rounded-md border border-white border-opacity-20 bg-black py-2 md:-left-4 md:right-auto 2xl:top-8 dropdown-content" style="display: none;">
                   {dropdownItems[item].map((subItem) => (
                     <a class="flex py-0.5 pl-4 pr-8 transition duration-300 hover:bg-white hover:bg-opacity-10" href={subItem.href}>
                       <p class="text-2xl text-white">{subItem.name}</p>
@@ -56,6 +60,8 @@ const dropdownItems: { [key: string]: { name: string; href: string; }[] } = {
   </nav>
 </header>
 
+<audio id="announcer-sfx" src="/sfx/announcersfx.mp3" preload="auto"></audio>
+
 <style>
 .rotate-180 {
   transition: transform 0.1s cubic-bezier(0.25, 1, 0.5, 1);
@@ -70,16 +76,32 @@ const dropdownItems: { [key: string]: { name: string; href: string; }[] } = {
 .no-underline {
   text-decoration: none !important;
 }
+
+.dropdown-content {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dropdown-appear {
+  opacity: 1 !important;
+}
 </style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    const robText = document.getElementById('rob-text');
+    const announcerSfx = document.getElementById('announcer-sfx') as HTMLAudioElement;
+
+    robText?.addEventListener('click', () => {
+      announcerSfx?.play();
+    });
+
     const pathToId: { [key: string]: string } = {
       '/': 'home',
       '/whoami': 'whoami',
       '/work': 'mywork',
       '/stats': 'mystats',
-      '/tools': 'tools',
+      '/wip': 'tools',
     };
     
     const underlineBar = document.getElementById('underline-bar');

@@ -14,7 +14,6 @@ let codingStats: CodingStats = {
 };
 
 try {
-  // Fetch language colors first
   const colorResponse = await fetch('https://raw.githubusercontent.com/ozh/github-colors/master/colors.json');
   const languageColors = await colorResponse.json();
 
@@ -25,15 +24,14 @@ try {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
   const result = await response.json();
-  const data = result.data; // Access the nested data object
-  //console.log('Coding stats fetched successfully:', data);
+  const data = result.data;
   codingStats = {
     totalCodingTime: data.human_readable_total,
     mostUsedLanguage: data.languages[0].name,
     languageUsage: data.languages.map((lang: any) => ({
       language: lang.name,
       time: lang.text,
-      color: languageColors[lang.name]?.color || '#858585' // Use gray as fallback color
+      color: languageColors[lang.name]?.color || '#858585'
     }))
   };
 } catch (error) {
@@ -48,29 +46,29 @@ try {
 
 <div class="flex text-white flex-wrap gap-2">
   <div class="flex flex-row w-full gap-2">
-    <div class="rounded-lg border bg-card text-card-foreground shadow-sm" style="width:324px;height:122px">
+    <div class="rounded-lg border border-white/20 bg-card text-card-foreground shadow-sm" style="width:324px;height:122px">
       <div class="p-6 flex flex-row items-center space-y-0 pb-2">
         <h1 class="tracking-tight text-sm font-medium">Coding hours</h1>
       </div>
       <div class="p-6 pt-0">
         <div class="text-lg font-bold">{codingStats.totalCodingTime}</div>
-        <p class="text-xs text-muted-foreground">in the last 7 days</p>
+        <p class="text-xs text-muted-foreground text-white/80">in the last 7 days</p>
       </div>
     </div>
-    <div class="rounded-lg border bg-card text-card-foreground shadow-sm" style="width:324px;height:122px">
+    <div class="rounded-lg border border-white/20 bg-card text-card-foreground shadow-sm" style="width:324px;height:122px">
       <div class="p-6 flex flex-row items-center space-y-0 pb-2">
         <h1 class="tracking-tight text-sm font-medium">Most used language</h1>
       </div>
       <div class="p-6 pt-0">
         <div class="text-lg font-bold">{codingStats.mostUsedLanguage}</div>
-        <p class="text-xs text-muted-foreground">{codingStats.languageUsage[0]?.time || "No data"}</p>
+        <p class="text-xs text-muted-foreground text-white/80">{codingStats.languageUsage[0]?.time || "No data"}</p>
       </div>
     </div>
   </div>
-  <div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full" style="width:656px;height:414px">
+  <div class="rounded-lg border border-white/20 bg-card text-card-foreground shadow-sm w-full" style="width:656px;height:414px">
     <div class="flex flex-col space-y-1.5 p-6">
       <h1 class="font-semibold tracking-tight text-lg">Top Languages</h1>
-      <p class="text-xs text-muted-foreground">of the last 7 days</p>
+      <p class="text-xs text-muted-foreground text-white/80">of the last 7 days</p>
     </div>
     <div class="p-6 pt-0 grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-0">
       <div class="relative h-[250px]">

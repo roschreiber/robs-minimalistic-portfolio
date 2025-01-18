@@ -2,21 +2,11 @@
 import Header from '../components/Header.astro';
 import Layout from '../layouts/Layout.astro';
 import CodingStatsBox from '../components/CodingStatsBox.astro';
-import DeviceBox from '../components/DeviceBox.astro';
 ---
 
 <Layout>
   <main class="container mx-auto px-4 py-8">
     <Header />
-    <div class="text-xl mb-4">
-      <p class="font-semibold tracking-wide text-white text-opacity-75">
-        Coding Statistics
-        <div class="font-semibold tracking-wide leading-5 text-white text-opacity-75">
-          Here's an overview of my coding activity and language usage.
-        </div>
-      </p>
-    </div>
     <CodingStatsBox />
-    <DeviceBox />
   </main>
 </Layout>

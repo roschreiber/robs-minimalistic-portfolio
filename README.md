@@ -1,18 +1,17 @@
-# Astro Starter Kit: Minimal
+# rob's minimalistic portfolio
 
-```sh
-npm create astro@latest -- --template minimal
-```
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new/roschreiber/portfolio-web-v2?skip_quickstart=true&machine=basicLinux32gb&repo=915006180&ref=master&geo=EuropeWest)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+> ❤️ **This project depends on Open Source Software like** ***[Lanyard](https://github.com/Phineas/lanyard)*****,** ***[Astro](https://github.com/withastro/astro)*** **or** ***[Wakatime](https://github.com/wakatime)*** **and wouldn't exist without them.**
 
-## 🚀 Project Structure
+## ❓ What is this?
 
-Inside of your Astro project, you'll see the following folders and files:
+Most portfolio sites look kinda bland & boring and don't actually tell the visitor something about you. This one does. 
+
+It uses ***[Lanyard](https://github.com/Phineas/lanyard)*** to grab your Discord & Spotify Activity on the front page of the website.
+
+
 
 ```text
 /
