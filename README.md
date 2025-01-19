@@ -46,7 +46,8 @@ I have created a ``config.ts`` file where you can just easily link your socials,
 
 Currently, the config looks like the following:
 
-```export const config = {
+```typescript
+export const config = {
   discordID: '316991053242564609',
   timeZone: 'Europe/Berlin',
   socialLinks: {
@@ -61,10 +62,45 @@ Currently, the config looks like the following:
 But, there most likely are things you want to customize that aren't shown in the configuration file. I have listed them below.
 
 <details>
-<summary>Important stuff that you cannot change through the config</summary>
+<summary><strong>Important stuff that you cannot change through the config</strong></summary>
 <br>
-> t
-> t
+
+<details>
+<summary>Change Header text</summary>
+<br>
+Go to <strong><code>components/Header.astro</code></strong> and change the text of line <strong>14</strong>
+</details>
+
+<details>
+<summary>Add / remove Projects</summary>
+<br>
+Go to <strong><code>pages/work.astro</code></strong> and add new Projects using a <strong>Box</strong> Component after line <strong>22</strong>.
+
+<strong>Box</strong> Components can have the following properties:
+- `class`: CSS classes for styling
+- `image`: URL of the project image
+- `title`: Title of the project
+- `description`: Short description of the project
+- `status`: Current status of the project ("online", "offline", "maintenance")
+- `users`: Number of users or any other relevant metric, could also just be amount of visitors
+- `languages`: Array of objects representing the languages used in the project, each with a `name` and `color`
+
+Example usage:
+```astro
+<Box 
+  image="/imgs/projects/new-project-logo.png" 
+  title="New Project" 
+  description="Lorem impsum dolor sit amet" 
+  status="online" 
+  users="100+" 
+  languages={[
+    { name: 'JavaScript', color: 'yellow' },
+    { name: 'CSS', color: 'blue' }
+  ]} 
+/>
+```
+</details>
+
 </details>
 
 ## 👀 What do you plan to do in the future?
