@@ -8,7 +8,9 @@ import { Icon } from 'astro-icon/components';
 </a>
 
 <script>
-  const discordID = import.meta.env.DISCORD_ID;
+  import config from "../config/config";
+
+  const discordID = config.discordID;
   const fetchSpotifyData = async () => {
     try {
       const response = await fetch(`https://api.lanyard.rest/v1/users/${discordID}`);

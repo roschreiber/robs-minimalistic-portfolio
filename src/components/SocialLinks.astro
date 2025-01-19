@@ -1,11 +1,21 @@
 ---
 import { Icon } from 'astro-icon/components';
+import config from '../config/config';
+const { discord, email, twitter, github } = config.socialLinks;
 ---
 
 <div class="flex justify-start ml-[-10px]">
-  <Icon name="tabler:brand-discord-filled" class="w-6 h-6 mx-2 text-white" />
-  <Icon name="tabler:mail-filled" class="h-6 w-6 mx-2 text-white" />
-  <Icon name="tabler:brand-twitter-filled" class="h-6 w-6 mx-2 text-white" />
-  <Icon name="tabler:brand-github-filled" class="w-6 h-6 mx-2 text-white" />
+  <a href={discord} target="_blank" >
+    <Icon name="tabler:brand-discord-filled" class="w-6 h-6 mx-2 text-white" />
+  </a>
+  <a href={email} target="_blank" >
+    <Icon name="tabler:mail-filled" class="h-6 w-6 mx-2 text-white" />
+  </a>
+  <a href={twitter} target="_blank" >
+    <Icon name="tabler:brand-twitter-filled" class="h-6 w-6 mx-2 text-white" />
+  </a>
+  <a href={github} target="_blank" >
+    <Icon name="tabler:brand-github-filled" class="w-6 h-6 mx-2 text-white" />
+  </a>
 </div>
 

@@ -1,5 +1,7 @@
 ---
-const timeZone = "Europe/Berlin";
+import config from '../config/config';
+const timeZone = config.timeZone;
+
 const currentTime = new Date().toLocaleTimeString("en-US", {
     timeZone,
     hour: "2-digit",

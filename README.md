@@ -9,38 +9,46 @@
 
 Most portfolio sites look kinda bland & boring and don't actually tell the visitor something about you. This one does. 
 
-It uses ***[Lanyard](https://github.com/Phineas/lanyard)*** to grab your Discord & Spotify Activity on the front page of the website.
+It uses ***[Lanyard](https://github.com/Phineas/lanyard)*** to grab your Discord & Spotify Activity and displays it on the front page of the website.
 
-(You need to join the Lanyard Discord )
+(You need to join the Lanyard Discord at [discord.gg/lanyard](https://discord.gg/lanyard) for tracking to work.)
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+It also shows visitors your coding stats in a fancy cake diagram through ***[Wakatime](https://github.com/wakatime)***, whilst displaying information about your **GitHub** Repos and Projects.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+The API Keys for all of the services above are defined through Vercel's ENV. See more down Below.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 🚀 Building and deploying
 
-Any static assets, like images, can be placed in the `public/` directory.
+### 🔨 Building the website
 
-## 🧞 Commands
+This project uses Astro. After downloading, simply run `npm i` to install all Node Packages the website depends on.
 
-All commands are run from the root of the project, from a terminal:
+After that run `npm run build` (to build locally!) or `vercel --prod` to deploy to Vercel. 
 
-| Command                   | Action                                           |
+Now, change the website header to not say "rob" (because im rob already!) and change whatever else you want.
+
+### 🔑 Environment Variables & APIs
+
+After downloading & deploying it to Vercel, please configure the following environment variables: 
+
+| ENV                   | Usage                                           |
 | :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| **`DISCORD_ID`**             | Your discord user ID.                            |
+| **`WAKATIME_KEY`**             | Wakatime API Key.      |
+| **`GITHUB_USERNAME`**             | Wakatime API Key.      |
 
-## 👀 Want to learn more?
+Now, head to the ```CodingStatsBox.astro``` file and change following endpoint's URL:
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```https://waka.hackclub.com/api/v1/users/current/stats/last_7_days?api_key=``` 
+
+to whatever URL your Wakatime server uses.
+
+## 👀 What do you plan to do in the future?
+
+I don't know yet. I'm currently planning to clean everything up and fix all bugs before maybe adding the **Stats.fm** API to display your top listened to Spotify songs on a seperate page.
+
+### 🤑 rob's minimalistic portfolio is perfect and i use it for everything i do! Do i need to credit you?
+
+Sorry, but rob's minimalistic portfolio actually isn't that perfect. It's full of spaghetti code which is held together by duct tape.
+
+And no, you do not need to give me any type of attribution, but if you do want to give me some credit for building the sheer perfect portfolio website, go for it!

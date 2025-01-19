@@ -40,7 +40,8 @@ interface LanguageColor {
 
   document.addEventListener('DOMContentLoaded', async () => {
     const languageColors = await fetchLanguageColors();
-    const response = await fetch('https://api.github.com/users/roschreiber/repos');
+    const githubUsername = import.meta.env.GITHUB_USERNAME;
+    const response = await fetch(`https://api.github.com/users/${githubUsername}/repos`);
     const repositories: Repository[] = await response.json();
 
     const reposContainer = document.getElementById('github-repos');
