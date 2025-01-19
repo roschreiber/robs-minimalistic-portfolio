@@ -6,7 +6,8 @@ export const config = {
     email: '#',
     twitter: 'https://x.com/NoSkipp',
     github: 'https://github.com/roschreiber'
-  }
+  },
+  githubUsername: 'roschreiber'
 };
 
 export default config;

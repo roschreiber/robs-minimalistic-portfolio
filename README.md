@@ -25,23 +25,47 @@ This project uses Astro. After downloading, simply run `npm i` to install all No
 
 After that run `npm run build` (to build locally!) or `vercel --prod` to deploy to Vercel. 
 
-Now, change the website header to not say "rob" (because im rob already!) and change whatever else you want.
-
 ### 🔑 Environment Variables & APIs
 
 After downloading & deploying it to Vercel, please configure the following environment variables: 
 
 | ENV                   | Usage                                           |
 | :------------------------ | :----------------------------------------------- |
-| **`DISCORD_ID`**             | Your discord user ID.                            |
 | **`WAKATIME_KEY`**             | Wakatime API Key.      |
-| **`GITHUB_USERNAME`**             | Wakatime API Key.      |
 
 Now, head to the ```CodingStatsBox.astro``` file and change following endpoint's URL:
 
 ```https://waka.hackclub.com/api/v1/users/current/stats/last_7_days?api_key=``` 
-
 to whatever URL your Wakatime server uses.
+
+Change your Discord User ID in the ``config.ts`` file for Lanyard to monitor it correctly.
+
+### 🎨 Customizing the website
+
+I have created a ``config.ts`` file where you can just easily link your socials, timezone & more.
+
+Currently, the config looks like the following:
+
+```export const config = {
+  discordID: '316991053242564609',
+  timeZone: 'Europe/Berlin',
+  socialLinks: {
+    discord: 'https://discord.com/users/316991053242564609',
+    email: '#',
+    twitter: 'https://x.com/NoSkipp',
+    github: 'https://github.com/roschreiber'
+  },
+  githubUsername: 'roschreiber'
+};
+```
+But, there most likely are things you want to customize that aren't shown in the configuration file. I have listed them below.
+
+<details>
+<summary>Important stuff that you cannot change through the config</summary>
+<br>
+> t
+> t
+</details>
 
 ## 👀 What do you plan to do in the future?
 
