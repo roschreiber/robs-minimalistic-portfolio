@@ -2,6 +2,8 @@
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new/roschreiber/portfolio-web-v2?skip_quickstart=true&machine=basicLinux32gb&repo=915006180&ref=master&geo=EuropeWest)
 
+![Picture of rob's minimalistic portfolio](https://github.com/roschreiber/robs-minimalistic-portfolio/blob/master/screenshotrobs.png?raw=true)
+
 
 > ❤️ **This project depends on Open Source Software like** ***[Lanyard](https://github.com/Phineas/lanyard)*****,** ***[Astro](https://github.com/withastro/astro)*** **or** ***[Wakatime](https://github.com/wakatime)*** **and wouldn't exist without them.**
 
